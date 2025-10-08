@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "adHistory",
+    "type": "har",
+    "deviceTypes": [
+      "wearable"
+    ]
+  }
+}

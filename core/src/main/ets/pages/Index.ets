@@ -1,0 +1,6 @@
+export { PermissionManager , PermissionType , PermissionResult} from 'ets/permission/PermissionManager'
+export { NavigationManager } from 'ets/navigation/NavigationManager'
+export { NotificationManager } from 'ets/notification/NotificationManager'
+export { BleManager } from 'ets/bluetooth/BleManager'
+export { StorageManager } from 'ets/storage/StorageManager'
+export { BackgroundManager } from 'ets/background/BackgroundManager'

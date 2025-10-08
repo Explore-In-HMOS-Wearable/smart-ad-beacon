@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "menu",
+    "type": "har",
+    "deviceTypes": [
+      "wearable"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "AdDetail",
+    "type": "har",
+    "deviceTypes": [
+      "wearable"
+    ]
+  }
+}
