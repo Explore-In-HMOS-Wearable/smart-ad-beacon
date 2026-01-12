@@ -163,7 +163,7 @@ All received ads are stored in the Ad History Page, so users can revisit them la
 │   │   └─── Index.ets
 ```
 # Constraints and Restrictions
-Supported Devices
+## Supported Devices
 
 Huawei Watch 5
 

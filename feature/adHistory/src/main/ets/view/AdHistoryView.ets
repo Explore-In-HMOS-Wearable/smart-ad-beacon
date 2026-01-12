@@ -1,8 +1,8 @@
-import { NavigationManager } from "core/src/main/ets/navigation/NavigationManager"
-import { AdModel } from "../model/AdModel"
-import { AdHistoryState } from "../state/AdHistoryState"
-import { AdDetailParams } from "../utils/params/AdDetailParam"
-import { AdHistoryViewModel } from "../viewmodel/AdHistoryViewModel"
+import { NavigationManager } from 'core/src/main/ets/navigation/NavigationManager'
+import { AdModel } from '../model/AdModel'
+import { AdHistoryState } from '../state/AdHistoryState'
+import { AdDetailParams } from '../utils/params/AdDetailParam'
+import { AdHistoryViewModel } from '../viewmodel/AdHistoryViewModel'
 
 @Component
 export struct AdHistoryView {
@@ -15,7 +15,7 @@ export struct AdHistoryView {
   }
 
   build() {
-    NavDestination(){
+    NavDestination() {
       Column() {
         Text('History')
           .fontSize(18)
@@ -23,17 +23,16 @@ export struct AdHistoryView {
           .alignSelf(ItemAlign.Center)
           .margin({ top: 12, bottom: 8 })
 
-        if (this.state.isLoading){
+        if (this.state.isLoading) {
           Text('Loading')
             .fontSize(18)
             .fontWeight(FontWeight.Bold)
             .alignSelf(ItemAlign.Center)
             .margin({ top: 12, bottom: 8 })
-        }else{
+        } else {
           List() {
             ForEach(this.state.ads, (item: AdModel) => {
               ListItem() {
-                // Kart benzeri yapı için Column kullanıyoruz
                 Column() {
                   Row() {
                     Image(item.imageSrc)
@@ -41,7 +40,7 @@ export struct AdHistoryView {
                       .aspectRatio(1)
                       .objectFit(ImageFit.Cover)
                       .borderRadius(24)
-                    // Metin Bilgileri
+
                     Column() {
                       Text(item.title)
                         .fontSize(14)
@@ -57,7 +56,6 @@ export struct AdHistoryView {
                     }
                     .layoutWeight(1)
 
-                    // Sağ ok ikonu
                     Image($r('sys.media.ohos_ic_public_arrow_right'))
                       .fillColor(Color.Grey)
                       .width(16)
@@ -77,18 +75,19 @@ export struct AdHistoryView {
 
                   NavigationManager.getInstance().pageInfos.pushPath({
                     name: 'adDetail',
-                    param: paramObj,
+                    param: paramObj
                   })
                 })
               }
             }, (item: AdModel) => item.beaconId)
           }
+          .width('100%')
+          .height('100%')
         }
       }
       .padding(12)
       .backgroundColor(Color.Black)
     }
      .hideBackButton(true)
-     .onReady((context : NavDestinationContext) => {})
   }
 }

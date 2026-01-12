@@ -1,4 +1,4 @@
-export class NavigationConstants{
+export class NavigationConstants {
   static settings = 'settings';
   static adHistory = 'adHistory';
   static adDetail = 'adDetail';

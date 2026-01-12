@@ -35,29 +35,30 @@ export class AdDetailViewModel {
   async init(): Promise<void> {
 
     const ble = await BleManager.getInstance()
-    const notify = await NotificationManager.getInstance()
-    const storage = await StorageManager.getInstance()
+    const notify = NotificationManager.getInstance()
+    const storage = StorageManager.getInstance()
 
     ble.setOnBeaconFoundCallback(async (beaconData: IBeaconData) => {
-      if (beaconData.uuid != null && beaconData.major != null && beaconData.minor != null){
-        const ad: AdModel | undefined = AdDetailHelper.adList.find(ad => ad.beaconId === beaconData.uuid && ad.major === beaconData.major && ad.minor === beaconData.minor);
+      if (beaconData.uuid !== null && beaconData.major !== null && beaconData.minor !== null) {
+        const ad: AdModel | undefined = AdDetailHelper.adList.find(ad => ad.beaconId === beaconData.uuid &&
+          ad.major === beaconData.major && ad.minor === beaconData.minor);
 
-        let data = await storage.getModelWithExpiry(CacheConstants.seenAds,AdListModel.fromJson)
-        let historyData = await storage.getModelWithExpiry(CacheConstants.adHistory,AdListModel.fromJson)
-        const item = data?.adList.find(item => item.beaconId === ad?.beaconId && item.major === ad.major && item.minor === ad.minor)
-        LogManager.info(this.TAG,`bulunan item: ${item?.beaconId}`)
+        const data = await storage.getModelWithExpiry(CacheConstants.seenAds, AdListModel.fromJson)
+        const historyData = await storage.getModelWithExpiry(CacheConstants.adHistory, AdListModel.fromJson)
+        const item = data?.adList.find(item => item.beaconId === ad?.beaconId &&
+          item.major === ad.major && item.minor === ad.minor)
 
-        if (ad != null && item == null){
-          LogManager.info(this.TAG,'yeni reklam bulundu')
-          await notify.publishSimpleNotification(ad!.title,ad!.description)
-          let list = data?.adList ?? []
-          let historyList = historyData?.adList ?? []
-          list?.push(ad)
-          historyList.push(ad)
+        if (ad !== null && item === null) {
+          LogManager.info(this.TAG, 'new ads detected')
+          notify.publishSimpleNotification(ad!.title, ad!.description)
+          const list = data?.adList ?? []
+          const historyList = historyData?.adList ?? []
+          list?.push(ad!)
+          historyList.push(ad!)
           const newList = new AdListModel(list)
           const newHistoryList = new AdListModel(historyList)
-          await storage.saveModelWithExpiry(CacheConstants.seenAds,newList,Duration.minutes(2))
-          await storage.saveModelWithExpiry(CacheConstants.adHistory,newHistoryList,Duration.days(30))
+          await storage.saveModelWithExpiry(CacheConstants.seenAds, newList, Duration.minutes(2))
+          await storage.saveModelWithExpiry(CacheConstants.adHistory, newHistoryList, Duration.days(30))
         }
       }
     })
@@ -65,7 +66,7 @@ export class AdDetailViewModel {
 
   }
 
-  setParam(param: AdDetailParams){
+  setParam(param: AdDetailParams) {
     this.state = this.state.with({adDetail: param})
   }
 }

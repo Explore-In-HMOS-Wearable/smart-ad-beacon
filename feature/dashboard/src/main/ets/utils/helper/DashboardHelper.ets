@@ -33,10 +33,10 @@ export class DashboardHelper {
       '58304cb1-1df0-43f9-b9ee-4cd4271f8070',
       0,
       4,
-      'Mavi Denim',
+      'Blue Denim',
       'Buy 1 second is 50% Sale',
       $r('app.media.ad4'),
       '414748-ad11133'
-    ),
+    )
   ]
 }

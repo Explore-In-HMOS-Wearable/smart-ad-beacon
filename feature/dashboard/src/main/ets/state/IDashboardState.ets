@@ -1,4 +1,4 @@
-import { AdModel } from "../model/AdModel";
+import { AdModel } from '../model/AdModel';
 
 export interface IDashboardState {
   isLoading?: boolean;

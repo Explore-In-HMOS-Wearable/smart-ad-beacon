@@ -27,8 +27,9 @@
           ],
           "when": "always"
         }
-      }
-
+      },
+      { "name": "ohos.permission.USE_BLUETOOTH" },
+      { "name": "ohos.permission.DISCOVER_BLUETOOTH" }
     ],
 
     "deliveryWithInstall": true,

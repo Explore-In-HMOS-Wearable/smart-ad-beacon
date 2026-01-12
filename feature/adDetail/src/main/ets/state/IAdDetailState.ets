@@ -1,4 +1,4 @@
-import { AdDetailParams } from "../utils/params/AdDetailParam";
+import { AdDetailParams } from '../utils/params/AdDetailParam';
 
 export interface IAdDetailState {
   isLoading?: boolean;

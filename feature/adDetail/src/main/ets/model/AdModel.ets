@@ -45,7 +45,7 @@ export class AdModel implements BaseModel {
       title: this.title,
       description: this.description,
       imageSrc: this.imageSrc,
-      code: this.code,
+      code: this.code
     };
   }
 

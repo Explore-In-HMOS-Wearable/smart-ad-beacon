@@ -23,7 +23,7 @@ export class SettingsState {
       error: updates.error === null ? undefined : (updates.error ?? this.error),
       message: updates.message === null ? undefined : (updates.message ?? this.message),
       autoEnableBluetooth: updates.autoEnableBluetooth ?? this.autoEnableBluetooth,
-      soundEnabled: updates.soundEnabled ?? this.soundEnabled,
+      soundEnabled: updates.soundEnabled ?? this.soundEnabled
     });
   }
 
@@ -33,7 +33,7 @@ export class SettingsState {
       error: null,
       message: '',
       autoEnableBluetooth: false,
-      soundEnabled: false,
+      soundEnabled: false
     });
   }
 }

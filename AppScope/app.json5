@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.hmosdemos.beaconadsviewer",
+    "bundleName": "com.hmosdemos.wearable.smart_ad_beacon",
     "vendor": "hmosdemos",
     "versionCode": 1000000,
     "versionName": "1.0.0",

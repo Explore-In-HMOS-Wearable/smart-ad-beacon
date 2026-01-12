@@ -28,7 +28,7 @@ export class AdDetailState {
       isLoading: false,
       error: null,
       message: '',
-      adDetail: null,
+      adDetail: null
     });
   }
 }

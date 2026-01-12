@@ -19,15 +19,15 @@ export class NotificationManager {
   async requestPermission(context: common.UIAbilityContext): Promise<boolean> {
     try {
       const isEnabled = await notificationManager.isNotificationEnabled();
-      LogManager.info('notification',`Notification enabled: ${isEnabled}`)
+      LogManager.info('notification', `Notification enabled: ${isEnabled}`)
       if (!isEnabled) {
         await notificationManager.requestEnableNotification(context);
-        LogManager.info('notification','Permission granted after request.')
+        LogManager.info('notification', 'Permission granted after request.')
       }
       return true;
     } catch (err) {
       const error = err as BusinessError;
-      LogManager.error('notification',`Permission check/request failed: ${error.code} - ${error.message}`)
+      LogManager.error('notification', `Permission check/request failed: ${error.code} - ${error.message}`)
       return false;
     }
   }
@@ -47,9 +47,9 @@ export class NotificationManager {
 
     notificationManager.publish(request, (err: BusinessError) => {
       if (err) {
-        LogManager.error('notification',`Publish failed: ${err.code}, ${err.message}`)
+        LogManager.error('notification', `Publish failed: ${err.code}, ${err.message}`)
       } else {
-        LogManager.info('notification','Notification published successfully.')
+        LogManager.info('notification', 'Notification published successfully.')
       }
     });
   }
@@ -77,9 +77,9 @@ export class NotificationManager {
 
     notificationManager.publish(request, (err: BusinessError) => {
       if (err) {
-        LogManager.error('notification',`Progress notification failed: ${err.code}, ${err.message}`)
+        LogManager.error('notification', `Progress notification failed: ${err.code}, ${err.message}`)
       } else {
-        LogManager.info('notification','Progress notification published.')
+        LogManager.info('notification', 'Progress notification published.')
       }
     });
   }
@@ -87,9 +87,9 @@ export class NotificationManager {
   setBadgeNumber(number: number): void {
     notificationManager.setBadgeNumber(number, (err: BusinessError) => {
       if (err) {
-        LogManager.error('notification',`setBadgeNumber failed: ${err.code}, ${err.message}`)
+        LogManager.error('notification', `setBadgeNumber failed: ${err.code}, ${err.message}`)
       } else {
-        LogManager.info('notification',`Badge number set to ${number}.`)
+        LogManager.info('notification', `Badge number set to ${number}.`)
       }
     });
   }
@@ -97,9 +97,9 @@ export class NotificationManager {
   addSlot(type: notificationManager.SlotType): void {
     notificationManager.addSlot(type, (err: BusinessError) => {
       if (err) {
-        LogManager.error('notification',`addSlot failed: ${err.code}, ${err.message}`)
+        LogManager.error('notification', `addSlot failed: ${err.code}, ${err.message}`)
       } else {
-        LogManager.info('notification',`Slot ${type} added.`)
+        LogManager.info('notification', `Slot ${type} added.`)
       }
     });
   }
@@ -107,9 +107,9 @@ export class NotificationManager {
   getSlot(type: notificationManager.SlotType): void {
     notificationManager.getSlot(type, (err: BusinessError, data: notificationManager.NotificationSlot) => {
       if (err) {
-        LogManager.error('notification',`getSlot failed: ${err.code}, ${err.message}`)
+        LogManager.error('notification', `getSlot failed: ${err.code}, ${err.message}`)
       } else {
-        LogManager.info('notification',`Slot info: enabled=${data.enabled}, level=${data.level}`)
+        LogManager.info('notification', `Slot info: enabled=${data.enabled}, level=${data.level}`)
       }
     });
   }
@@ -117,9 +117,9 @@ export class NotificationManager {
   removeSlot(type: notificationManager.SlotType): void {
     notificationManager.removeSlot(type, (err: BusinessError) => {
       if (err) {
-        LogManager.error('notification',`removeSlot failed: ${err.code}, ${err.message}`)
+        LogManager.error('notification', `removeSlot failed: ${err.code}, ${err.message}`)
       } else {
-        LogManager.info('notification',`Slot ${type} removed.`)
+        LogManager.info('notification', `Slot ${type} removed.`)
       }
     });
   }

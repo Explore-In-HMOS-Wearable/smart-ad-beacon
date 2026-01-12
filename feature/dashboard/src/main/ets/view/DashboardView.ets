@@ -2,6 +2,7 @@ import { NavigationManager } from 'core/src/main/ets/navigation/NavigationManage
 import { DashboardState } from '../state/DashboardState'
 import { NavigationConstants } from '../utils/constants/NavigationConstants'
 import { DashboardViewModel } from '../viewmodel/DashboardViewModel'
+import { common } from '@kit.AbilityKit'
 
 @Component
 export struct DashboardView {
@@ -13,7 +14,8 @@ export struct DashboardView {
     this.viewModel.addListener((newState: DashboardState) => {
       this.state = newState
     })
-    this.viewModel.init()
+    const uiContext = globalThis.getUIContext?.() as common.UIAbilityContext;
+    this.viewModel.init(uiContext)
   }
 
   onPageHide(): void {
@@ -21,7 +23,7 @@ export struct DashboardView {
   }
 
   build() {
-    NavDestination(){
+    NavDestination() {
       Stack() {
         if (this.state.latestAd) {
           Image(this.state.latestAd.imageSrc)
@@ -44,18 +46,18 @@ export struct DashboardView {
           .alignItems(HorizontalAlign.Center)
         }
 
-        // Alt merkezde menü butonu
         Column() {
           Button() {
             Image($r('sys.media.ohos_ic_window_menu_waterfall'))
               .width(24)
               .height(24)
           }
+          .fontColor(Color.Black)
           .backgroundColor(Color.White)
           .onClick(() => {
             NavigationManager.getInstance().pageInfos.pushPath({ name: NavigationConstants.menu })
           })
-          .margin({ bottom: 24 }) // butonun ekran kenarına yapışmaması için boşluk
+          .margin({ bottom: 24 })
         }
         .width('100%')
         .height('100%')
@@ -71,6 +73,5 @@ export struct DashboardView {
       })
     }
      .hideBackButton(true)
-     .onReady((context : NavDestinationContext) => {})
   }
 }

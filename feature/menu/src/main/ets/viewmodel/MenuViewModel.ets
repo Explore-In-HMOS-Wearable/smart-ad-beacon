@@ -11,7 +11,7 @@ export class MenuViewModel {
   private _state: MenuState = MenuState.initial();
   private listeners: Array<(state: MenuState) => void> = [];
   private readonly TAG = 'MenuViewModel';
-  context = getContext(this) as common.UIAbilityContext;
+  context? : common.UIAbilityContext;
 
   get state(): MenuState {
     return this._state;
@@ -30,24 +30,23 @@ export class MenuViewModel {
     this.listeners.forEach(listener => listener(this._state));
   }
 
-  async init(): Promise<void> {
+  async init(context: common.UIAbilityContext): Promise<void> {
     this.state = this.state.with({ isLoading: true });
+    this.context = context
 
     try {
-      const bluetoothGranted = await this.requestBluetoothPermission();
-      const notificationGranted = await this.requestNotificationPermission();
-      LogManager.info(this.TAG,`bluetooth granted: ${bluetoothGranted} notification grandted: ${notificationGranted}`)
+      const bluetoothGranted = await this.requestBluetoothPermission(context);
+      const notificationGranted = await this.requestNotificationPermission(context);
+      LogManager.info(this.TAG, `bluetooth granted: ${bluetoothGranted} notification grandted: ${notificationGranted}`)
 
       if ((bluetoothGranted === PermissionResult.Granted) && (notificationGranted === true)) {
-        LogManager.info(this.TAG, 'Tüm izinler alındı');
         NavigationManager.getInstance().pageInfos.pushPath({ name: NavigationConstants.dashboard });
       } else {
-        LogManager.warn(this.TAG, 'Gerekli izinlerden biri eksik');
-        this.state = this.state.with({ error: 'Bluetooth veya bildirim izni reddedildi.' });
+        this.state = this.state.with({ error: 'Bluetooth or notifications rejected.' });
       }
     } catch (e) {
       LogManager.error(this.TAG, `init() error: ${JSON.stringify(e)}`);
-      this.state = this.state.with({ error: 'İzinler alınırken hata oluştu.' });
+      this.state = this.state.with({ error: 'Permission error.' });
     } finally {
       this.state = this.state.with({ isLoading: false });
     }
@@ -55,14 +54,12 @@ export class MenuViewModel {
     BackgroundManager.startBeaconBackgroundTask(this.context)
   }
 
-  private async requestBluetoothPermission(): Promise<PermissionResult> {
-    const context = getContext(this) as common.UIAbilityContext;
+  private async requestBluetoothPermission(context: common.UIAbilityContext): Promise<PermissionResult> {
     return await PermissionManager.getInstance().requestPermission(PermissionType.BLUETOOTH, context);
   }
 
-  private async requestNotificationPermission(): Promise<boolean> {
+  private async requestNotificationPermission(context: common.UIAbilityContext): Promise<boolean> {
     const nm = NotificationManager.getInstance()
-    const context = getContext(this) as common.UIAbilityContext;
     return await nm.requestPermission(context)
   }
 }

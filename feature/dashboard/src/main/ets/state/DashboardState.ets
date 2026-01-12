@@ -37,7 +37,7 @@ export class DashboardState {
       message: '',
       isScanning: false,
       distance: 0,
-      latestAd: null,
+      latestAd: null
     });
   }
 }
